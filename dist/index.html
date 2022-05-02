@@ -8,7 +8,19 @@
     <title>Todo List v2</title>
   </head>
   <body>
-    
+    <section id="sidebar">
+      <h2>Projects</h2>
+      <div id="project-list"></div>
+      <form>
+        <input id="new-project-title" type="text" placeholder="project name">
+        <button id="add-project-btn">Add Project</button>
+      </form>
+    </section>
+
+    <section id="display-project-container">
+      <h2 id="selected-project-title"></h2>
+      <div id="todos-container"></div>
+    </section>
     <script src="../dist/main.js"></script>
   </body>
 </html>
