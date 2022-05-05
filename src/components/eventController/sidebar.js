@@ -6,7 +6,9 @@ const sidebarListener = (() => {
       e.preventDefault();
       
       const newProjectInput = document.querySelector('#new-project-title');
-      
+
+      if (!newProjectInput.value) return;
+    
       todoList.createProject(newProjectInput.value);
       addProject(newProjectInput.value);
       
