@@ -11,12 +11,14 @@ const sidebar = todoList => {
     div.classList.add('project-container');
     editBtn.classList.add('edit-project-btn');
     
+    if (todoList.projectList.length === 1) div.id = 'selected-project';
     p.textContent = title;
     editBtn.textContent = 'Edit';
 
     sidebarListener.editProjectListener().edit(editBtn, editProject);
-
+    
     [p, editBtn].forEach(el => div.appendChild(el));
+    sidebarListener.selectProject(div);
     projectListContainer.appendChild(div);
   }
 
@@ -80,12 +82,14 @@ const sidebar = todoList => {
     function removeProject() {
       projectContainer.parentElement.removeChild(projectContainer);
       todoList.projectList.splice(projectIndex, 1);
+
+      if ([...projectListContainer.children].length >= 1) projectListContainer.firstChild.id = 'selected-project';
     }
 
     return { edit, confirmEdit, cancelEdit, removeProject }
   }
 
-  todoList.projectList.forEach(project => addProject(project.title));
+  todoList.projectList.forEach((project) => addProject(project.title));
 
   sidebarListener.addProjectListener(todoList, addProject);
 };

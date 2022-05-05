@@ -36,7 +36,19 @@ const sidebarListener = (() => {
     return { edit, confirm, cancel, remove }
   }
 
-  return { addProjectListener, editProjectListener }
+  function selectProject(projectContainer) {
+    const projectP = projectContainer.children[0];
+
+    projectP.addEventListener('click', () => {
+      if (projectContainer.parentElement.querySelector('#selected-project')) {
+        projectContainer.parentElement.querySelector('#selected-project').removeAttribute('id');
+      }
+
+      projectContainer.id = 'selected-project';
+    });
+  }
+
+  return { addProjectListener, editProjectListener, selectProject }
 })();
 
 export default sidebarListener;
