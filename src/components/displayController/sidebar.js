@@ -55,6 +55,8 @@ const sidebar = todoList => {
     function confirmEdit() {
       const newProjectTitle = projectContainer.querySelector('input').value
 
+      if (!newProjectTitle) return;
+
       while (projectContainer.firstChild) {
         projectContainer.removeChild(projectContainer.firstChild)
       }
