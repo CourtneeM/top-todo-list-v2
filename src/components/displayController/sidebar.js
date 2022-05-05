@@ -46,7 +46,7 @@ const sidebar = todoList => {
       sidebarListener.editProjectListener().cancel(cancelBtn, cancelEdit);
 
       removeBtn.textContent = 'del';
-      sidebarListener.editProjectListener().remove(e);
+      sidebarListener.editProjectListener().remove(removeBtn, removeProject);
 
       [confirmBtn, cancelBtn, removeBtn].forEach(btn => div.appendChild(btn));
       [input, div].forEach(el => projectContainer.appendChild(el));
@@ -76,7 +76,8 @@ const sidebar = todoList => {
     }
 
     function removeProject() {
-
+      projectContainer.parentElement.removeChild(projectContainer);
+      todoList.projectList.splice(projectIndex, 1);
     }
 
     return { edit, confirmEdit, cancelEdit, removeProject }

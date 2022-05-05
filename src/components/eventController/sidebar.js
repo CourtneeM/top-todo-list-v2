@@ -11,8 +11,6 @@ const sidebarListener = (() => {
       addProject(newProjectInput.value);
       
       newProjectInput.value = '';
-      
-      console.log(todoList.projectList);
     });
   }
 
@@ -29,8 +27,8 @@ const sidebarListener = (() => {
       cancelBtn.addEventListener('click', () => cancelEdit());
     }
 
-    function remove() {
-
+    function remove(removeBtn, removeProject) {
+      removeBtn.addEventListener('click', () => removeProject());
     }
 
     return { edit, confirm, cancel, remove }
