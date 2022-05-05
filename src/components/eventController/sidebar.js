@@ -21,8 +21,8 @@ const sidebarListener = (() => {
       editBtn.addEventListener('click', e => editProject(e).edit());
     }
 
-    function confirm() {
-
+    function confirm(confirmBtn, confirmEdit) {
+      confirmBtn.addEventListener('click', () => confirmEdit());
     }
 
     function cancel(cancelBtn, cancelEdit) {

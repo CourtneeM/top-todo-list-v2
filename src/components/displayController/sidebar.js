@@ -21,9 +21,10 @@ const sidebar = todoList => {
   }
 
   function editProject(e) {
-      const projectContainer = e.target.parentElement;
-      const currentProjectP = projectContainer.querySelector('p');
-      const editBtnEl = projectContainer.querySelector('.edit-project-btn');
+    const projectIndex = [...e.target.parentElement.parentElement.children].indexOf(e.target.parentElement);
+    const projectContainer = e.target.parentElement;
+    const currentProjectP = projectContainer.querySelector('p');
+    const editBtnEl = projectContainer.querySelector('.edit-project-btn');
 
     function edit() {
       while (projectContainer.firstChild) {
@@ -34,12 +35,12 @@ const sidebar = todoList => {
       input.value = currentProjectP.textContent;
 
       const div = document.createElement('div');
-      const checkBtn = document.createElement('button');
+      const confirmBtn = document.createElement('button');
       const cancelBtn = document.createElement('button');
       const removeBtn = document.createElement('button');
 
-      checkBtn.textContent = 'v/';
-      sidebarListener.editProjectListener().confirm(projectContainer);
+      confirmBtn.textContent = 'v/';
+      sidebarListener.editProjectListener().confirm(confirmBtn, confirmEdit);
 
       cancelBtn.textContent = 'x';
       sidebarListener.editProjectListener().cancel(cancelBtn, cancelEdit);
@@ -47,12 +48,23 @@ const sidebar = todoList => {
       removeBtn.textContent = 'del';
       sidebarListener.editProjectListener().remove(e);
 
-      [checkBtn, cancelBtn, removeBtn].forEach(btn => div.appendChild(btn));
+      [confirmBtn, cancelBtn, removeBtn].forEach(btn => div.appendChild(btn));
       [input, div].forEach(el => projectContainer.appendChild(el));
     }
 
     function confirmEdit() {
+      const newProjectTitle = projectContainer.querySelector('input').value
 
+      while (projectContainer.firstChild) {
+        projectContainer.removeChild(projectContainer.firstChild)
+      }
+
+      currentProjectP.textContent = newProjectTitle;
+
+      [currentProjectP, editBtnEl].forEach(el => projectContainer.appendChild(el));
+
+      // move out of displayController
+      todoList.projectList[projectIndex].title = newProjectTitle;
     }
 
     function cancelEdit() {
