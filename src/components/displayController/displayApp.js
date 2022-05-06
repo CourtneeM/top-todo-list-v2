@@ -5,20 +5,26 @@ function displayApp(todoList) {
   let projectIndex = 0;
 
   let observer = new MutationObserver(mutations => {
-    projectIndex = [...mutations[1].target.parentElement.children].indexOf(mutations[1].target);
+    if (mutations.some(record => record.type == 'attributes')) {
+      const selectedProject = mutations.filter(record => record.target.id === 'selected-project')[0].target;      
+      projectIndex = [...selectedProject.parentElement.children].indexOf(selectedProject);
+    }
+
     loadProject(projectIndex);
   });
-  observer.observe(document, {
+  
+  observer.observe(document.querySelector('#sidebar'), {
     subtree: true,
     attributes: true,
+    attributeFilter: ['id'],
+    childList: true,
   });
 
   function loadProject(projectIndex) {
-    Project(projectIndex);
+    Project(todoList.projectList[projectIndex]);
   }
 
   Sidebar(todoList);
-  loadProject(projectIndex);
 }
 
 export default displayApp;
