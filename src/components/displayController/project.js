@@ -1,3 +1,4 @@
+import Todo from './Todo.js';
 import projectEvents from '../eventController/Project';
 import todoList from '../todos/TodoList';
 
@@ -16,7 +17,7 @@ function Project(selectedProject) {
     addTodoBtn.id = 'add-todo-btn';
   
     addTodoBtn.textContent = 'Add Todo';
-    projectEvents.addTodo(selectedProject, addTodo, addTodoBtn);
+    projectEvents.addTodo(selectedProject, Todo.add, addTodoBtn);
   
     Object.keys(selectedProject.todoList[0]).forEach(attribute => {
       const p = document.createElement('p');
@@ -31,36 +32,13 @@ function Project(selectedProject) {
 
     newTodoContainer.appendChild(addTodoBtn);
 
-    console.log(todoList.projectList);
     displayProjectContainer.insertBefore(newTodoContainer, todosContainer);
-  }
-
-  function addTodo(todo = null) {
-    const todoContainer = document.createElement('div');
-    todoContainer.classList.add('todo-container');
-
-    for (let key in todo) {
-      const p = document.createElement('p');
-      p.textContent = todo[key];
-
-      todoContainer.appendChild(p);
-    }
-
-    todosContainer.appendChild(todoContainer);
-  }
-
-  function displayTodos() {
-    while (todosContainer.firstChild) todosContainer.removeChild(todosContainer.firstChild);
-
-    selectedProject.todoList.forEach(todo => {
-      addTodo(todo);
-    });
   }
 
   const displayProjectContainer = document.querySelector('#display-project-container');
 
   newTodoContainer();
-  displayTodos();
+  Todo.display(selectedProject);
 }
 
 export default Project;
