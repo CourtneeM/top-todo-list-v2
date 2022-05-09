@@ -42,17 +42,23 @@ const Todo = (() => {
       while (selectedTodo.firstChild) {
         selectedTodo.removeChild(selectedTodo.firstChild);
       }
+
+      const inputDiv = document.createElement('div');
+      const btnDiv = document.createElement('div');
+
+      currentTodoPs.forEach(p => {
+        const input = document.createElement('input');
+        input.value = p.textContent;
+
+        inputDiv.appendChild(input);        
+      });
       
-      const input = document.createElement('input');
-      // input.value = currentProjectP.textContent;
-      
-      const div = document.createElement('div');
       const confirmBtn = document.createElement('button');
       const cancelBtn = document.createElement('button');
       const deleteBtn = document.createElement('button');
       
       confirmBtn.textContent = 'v/';
-      todoEvents.confirmEdit(confirmEdit, confirmBtn);
+      todoEvents.confirmEdit(currentProject, confirmEdit, confirmBtn);
       
       cancelBtn.textContent = 'x';
       todoEvents.cancelEdit(cancelEdit, cancelBtn);
@@ -60,12 +66,18 @@ const Todo = (() => {
       deleteBtn.textContent = 'Del';
       todoEvents.remove(currentProject, remove, deleteBtn);
       
-      [confirmBtn, cancelBtn, deleteBtn].forEach(btn => div.appendChild(btn));
-      [input, div].forEach(el => selectedTodo.appendChild(el));
+      [confirmBtn, cancelBtn, deleteBtn].forEach(btn => btnDiv.appendChild(btn));
+      [inputDiv, btnDiv].forEach(div => selectedTodo.appendChild(div));
     }
     
-    function confirmEdit() {
-      
+    function confirmEdit(selectedTodo, newValues) {
+      while (selectedTodo.firstChild) selectedTodo.removeChild(selectedTodo.firstChild);
+
+      newValues.forEach((value, i) => {
+        currentTodoPs[i].textContent = value;
+      });
+
+      [...currentTodoPs, editBtnEl].forEach(el => selectedTodo.appendChild(el));
     }
 
     function cancelEdit() {

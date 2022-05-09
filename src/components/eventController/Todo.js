@@ -5,8 +5,16 @@ const todoEvents = (() => {
     });
   }
 
-  function confirmEdit() {
-
+  function confirmEdit(currentProject, confirmEdit, confirmEditBtn) {
+    confirmEditBtn.addEventListener('click', () => {
+      const selectedTodo = confirmEditBtn.parentElement.parentElement;
+      const newValues = [...selectedTodo.querySelectorAll('input')].map(input => input.value);
+      const index = [...confirmEditBtn.parentElement.parentElement.parentElement.children].indexOf(confirmEditBtn.parentElement.parentElement);
+      
+      confirmEdit(selectedTodo, newValues);
+      currentProject.todoList[index].editTodo(newValues);
+      console.log(currentProject);
+    });
   }
 
   function cancelEdit(cancelEdit, cancelBtn) {
@@ -18,7 +26,8 @@ const todoEvents = (() => {
   function remove(currentProject, remove, deleteBtn) {
     deleteBtn.addEventListener('click', () => {
       const selectedTodo = deleteBtn.parentElement.parentElement;
-      const index = [...deleteBtn.parentElement.parentElement.parentElement.children].indexOf(deleteBtn.parentElement);
+      const index = [...deleteBtn.parentElement.parentElement.parentElement.children].indexOf(deleteBtn.parentElement.parentElement);
+      
       currentProject.deleteTodo(index);
       remove(selectedTodo);
     });
