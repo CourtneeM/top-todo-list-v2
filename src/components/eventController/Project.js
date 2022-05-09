@@ -7,7 +7,7 @@ const projectEvents = (() => {
 
         return value;
       });
-
+      
       addTodo( {...newTodoValues} );
       selectedProject.createTodo(...newTodoValues);
     });

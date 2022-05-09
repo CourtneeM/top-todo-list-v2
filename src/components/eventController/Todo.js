@@ -1,24 +1,30 @@
-import Todo from '../displayController/Todo';
-
 const todoEvents = (() => {
-  function edit(editBtn) {
-    editBtn.addEventListener('click', () => {
-
+  function edit(editTodo, editBtn) {
+    editBtn.addEventListener('click', e => {
+      editTodo(e).edit();
     });
   }
 
-  function remove(currentProject, deleteBtn) {
+  function confirmEdit() {
+
+  }
+
+  function cancelEdit(cancelEdit, cancelBtn) {
+    cancelBtn.addEventListener('click', () => {
+      cancelEdit();
+    });
+  }
+
+  function remove(currentProject, remove, deleteBtn) {
     deleteBtn.addEventListener('click', () => {
-      const index = [...deleteBtn.parentElement.parentElement.children].indexOf(deleteBtn.parentElement);
-      const selectedTodo = deleteBtn.parentElement;
-
+      const selectedTodo = deleteBtn.parentElement.parentElement;
+      const index = [...deleteBtn.parentElement.parentElement.parentElement.children].indexOf(deleteBtn.parentElement);
       currentProject.deleteTodo(index);
-      Todo.remove(selectedTodo);
-      console.log(currentProject);
+      remove(selectedTodo);
     });
   }
 
-  return { edit, remove }
+  return { edit, confirmEdit, cancelEdit, remove }
 })();
 
 export default todoEvents;
