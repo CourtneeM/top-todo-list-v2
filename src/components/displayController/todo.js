@@ -24,12 +24,25 @@ const Todo = (() => {
     todoContainer.classList.add('todo-container');
 
     for (let key in todo) {
-      const p = document.createElement('p');
-
-      p.classList.add(key);
-      p.textContent = todo[key];
-
-      todoContainer.appendChild(p);
+      if (key === 'priority') {
+        switch (todo[key]) {
+          case '1':
+            todoContainer.style.backgroundColor = 'red'; 
+            break;
+            case '2':
+            todoContainer.style.backgroundColor = 'orange'; 
+            break;
+            case '3':
+            todoContainer.style.backgroundColor = 'white'; 
+        }
+      } else {
+        const p = document.createElement('p');
+        
+        p.classList.add(key);
+        p.textContent = todo[key];
+        
+        todoContainer.appendChild(p);
+      }
     }
 
     const editBtn = document.createElement('img');

@@ -10,9 +10,7 @@ function Project(selectedProject) {
   selectedProjectTitle.textContent = selectedProject.title;
 
   function newTodoContainer() {
-    console.log('ayy');
     if (document.querySelector('#new-todo-container')) displayProjectContainer.removeChild(document.querySelector('#new-todo-container'));
-    console.log('ooo');
 
     const todoAttributes = ['Title', 'Description', 'Due Date', 'Priority', 'Notes', 'Completed'];
     const newTodoContainer = document.createElement('div');
@@ -26,9 +24,26 @@ function Project(selectedProject) {
     todoAttributes.forEach(attribute => {
       const div = document.createElement('div');
       const p = document.createElement('p');
-      const input = document.createElement('input');
-      
+      let input;
+
+      if (attribute === 'Priority') {
+        input = document.createElement('select');
+
+        [1, 2, 3].forEach(num => {
+          const option = document.createElement('option');
+          option.value = num;
+          option.textContent = num;
+
+          input.appendChild(option);
+        });
+      } else {
+        input = document.createElement('input');
+      }
+
+      if (attribute === 'Completed') input.type = 'checkbox';
+
       p.textContent = attribute;
+      input.classList.add('new-todo-value');
       input.setAttribute('id', attribute);
       input.setAttribute('name', attribute);
 
