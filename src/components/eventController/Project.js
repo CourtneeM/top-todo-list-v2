@@ -1,15 +1,16 @@
 const projectEvents = (() => {
   function addTodo(selectedProject, addTodo, addTodoBtn) {
     addTodoBtn.addEventListener('click', () => {
-      const newTodoValues = [...document.querySelectorAll('#new-todo-container > input')].map(el => {
-        const value = el.value;
+      const newTodo = {};
+      
+      [...document.querySelectorAll('#new-todo-container > div > input')].forEach((el, i) => {
+        newTodo[el.id] = el.value;
         el.value = '';
-
-        return value;
       });
       
-      addTodo( {...newTodoValues} );
-      selectedProject.createTodo(...newTodoValues);
+      console.log(selectedProject, newTodo);
+      addTodo( newTodo );
+      selectedProject.createTodo(Object.values(newTodo));
     });
   }
 

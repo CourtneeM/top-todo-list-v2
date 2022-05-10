@@ -10,8 +10,8 @@ class Project {
     this.title = newTitle;
   }
 
-  createTodo(title, description, dueDate, priority, notes, completed) {
-    this.todoList.push(new Todo(title, description, dueDate, priority, notes, completed));
+  createTodo(values) {
+    this.todoList.push(new Todo(...values));
   }
 
   deleteTodo(index) {

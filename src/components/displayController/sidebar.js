@@ -1,4 +1,8 @@
 import sidebarListener from '../eventController/sidebar';
+import editIcon from '../../../dist/assets/icons/square-edit-outline.png';
+import checkboxIcon from '../../../dist/assets/icons/checkbox-outline.png';
+import cancelIcon from '../../../dist/assets/icons/close-box-outline.png';
+import trashIcon from '../../../dist/assets/icons/trash-can-outline.png';
 
 const sidebar = todoList => {
   const projectListContainer = document.querySelector('#project-list');
@@ -6,14 +10,14 @@ const sidebar = todoList => {
   function addProject(title) {
     const div = document.createElement('div');
     const p = document.createElement('p');
-    const editBtn = document.createElement('button');
+    const editBtn = document.createElement('img');
 
     div.classList.add('project-container');
     editBtn.classList.add('edit-project-btn');
     
     if (todoList.projectList.length === 1) div.id = 'selected-project';
     p.textContent = title;
-    editBtn.textContent = 'Edit';
+    editBtn.src = editIcon;
 
     sidebarListener.editProjectListener().edit(editBtn, editProject);
     
@@ -37,17 +41,17 @@ const sidebar = todoList => {
       input.value = currentProjectP.textContent;
 
       const div = document.createElement('div');
-      const confirmBtn = document.createElement('button');
-      const cancelBtn = document.createElement('button');
-      const removeBtn = document.createElement('button');
+      const confirmBtn = document.createElement('img');
+      const cancelBtn = document.createElement('img');
+      const removeBtn = document.createElement('img');
 
-      confirmBtn.textContent = 'v/';
+      confirmBtn.src = checkboxIcon;
       sidebarListener.editProjectListener().confirm(confirmBtn, confirmEdit);
 
-      cancelBtn.textContent = 'x';
+      cancelBtn.src = cancelIcon;
       sidebarListener.editProjectListener().cancel(cancelBtn, cancelEdit);
 
-      removeBtn.textContent = 'del';
+      removeBtn.src = trashIcon;
       sidebarListener.editProjectListener().remove(removeBtn, removeProject);
 
       [confirmBtn, cancelBtn, removeBtn].forEach(btn => div.appendChild(btn));
