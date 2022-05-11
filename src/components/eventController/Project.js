@@ -16,9 +16,7 @@ const projectEvents = (() => {
 
         if (attribute !== 'priority') el.value = '';
         if (attribute === 'completed') el.checked = false;
-        console.log(el);
       });
-      console.log(Object.values(newTodo));
 
       addTodo( newTodo );
       selectedProject.createTodo(Object.values(newTodo));

@@ -3,7 +3,7 @@ import Todo from './Todo';
 class Project {
   constructor(title) {
     this.title = title;
-    this.todoList = [(new Todo('1', '1', '1', '1', '1', 'false'))];
+    this.todoList = [(new Todo('Title', 'Description', '2/22/2022', '1', 'Notes', false))];
   }
 
   editProjectTitle(newTitle) {

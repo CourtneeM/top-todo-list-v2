@@ -90,9 +90,12 @@ const Todo = (() => {
 
         input.classList.add(p.classList[0]);
         input.value = p.textContent;
+        input.style.display = 'block';
 
         inputDiv.appendChild(input);        
       });
+
+      console.log(inputDiv);
       
       const confirmBtn = document.createElement('img');
       const cancelBtn = document.createElement('img');

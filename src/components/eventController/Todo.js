@@ -13,7 +13,6 @@ const todoEvents = (() => {
       
       confirmEdit(selectedTodo, newValues);
       currentProject.todoList[index].editTodo(newValues);
-      console.log(currentProject);
     });
   }
 

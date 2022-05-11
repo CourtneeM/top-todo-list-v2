@@ -104,15 +104,26 @@ body {
       text-align: center;
     }
 
-    .description {
-    }
-
     .notes {
       font-style: italic;
     }
 
-    .completed {
+    input {
+      width: 70%;
+      margin: 5px auto;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      text-align: center;
 
+      &.due-date {
+        width: 40%;
+        font-size: 0.6rem;
+      }
+      
+      &.description, &.notes, &.completed {
+        width: 80%;
+        font-size: 0.7rem;
+      }
     }
     
     .edit-todo-btn {
