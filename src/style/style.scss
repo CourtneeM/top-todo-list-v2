@@ -80,12 +80,20 @@ body {
     flex-basis: 22.5%;
     position: relative;
     margin: 1.25%;
-    padding: 15px;
+    padding: 35px 25px 10px;
     border: 1px solid #000;
     
     .title {
+      margin-bottom: 15px;
       font-weight: 800;
       text-align: center;
+    }
+
+    .due-date {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 0.8rem;
     }
 
     .description, .notes, .completed {
@@ -101,13 +109,13 @@ body {
     .expand-todo-btn {
       display: block;
       margin: 0 auto;
-      padding: 0 45%;
+      padding: 0 40%;
     }
 
     .collapse-todo-btn {
       display: none;
       margin: 0 auto;
-      padding: 0 45%;
+      padding: 0 40%;
     }
   }
 }

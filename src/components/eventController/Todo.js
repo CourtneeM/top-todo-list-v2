@@ -33,7 +33,23 @@ const todoEvents = (() => {
     });
   }
 
-  return { edit, confirmEdit, cancelEdit, remove }
+  function expand(expandTodo, expandCollapseBtn) {
+    expandCollapseBtn.addEventListener('click', () => {
+      const selectedTodo = expandCollapseBtn.parentElement;
+      
+      expandTodo(selectedTodo);
+    });
+  }
+  
+  function collapse(collapseTodo, expandCollapseBtn) {
+    expandCollapseBtn.addEventListener('click', () => {
+      const selectedTodo = expandCollapseBtn.parentElement;
+      
+      collapseTodo(selectedTodo);
+    });
+  }
+
+  return { edit, confirmEdit, cancelEdit, remove, expand, collapse }
 })();
 
 export default todoEvents;

@@ -38,8 +38,13 @@ const Todo = (() => {
       } else {
         const p = document.createElement('p');
         
-        p.classList.add(key);
-        p.textContent = todo[key];
+        key === 'dueDate' ? p.classList.add('due-date') : p.classList.add(key);
+
+        if (key === 'completed') {
+          p.textContent = !!todo[key] ? 'Completed' : 'Incomplete';
+        } else {
+          p.textContent = todo[key];
+        }
         
         todoContainer.appendChild(p);
       }
@@ -55,11 +60,11 @@ const Todo = (() => {
     
     expandBtn.classList.add('expand-todo-btn');
     expandBtn.src = expandIcon;
-    // todoEvents.edit(expandBtn);
+    todoEvents.expand(expandTodo, expandBtn);
     
     collapseBtn.classList.add('collapse-todo-btn');
     collapseBtn.src = collapseIcon;
-    // todoEvents.edit(collapseBtn);
+    todoEvents.collapse(collapseTodo, collapseBtn);
     
     [editBtn, expandBtn, collapseBtn].forEach(btn => todoContainer.appendChild(btn));
     todosContainer.appendChild(todoContainer);
@@ -69,6 +74,8 @@ const Todo = (() => {
     const selectedTodo = e.target.parentElement;
     const currentTodoPs = [...selectedTodo.querySelectorAll('p')];
     const editBtnEl = selectedTodo.querySelector('.edit-todo-btn');
+    const expandBtn = selectedTodo.querySelector('.expand-todo-btn');
+    const collapseBtn = selectedTodo.querySelector('.collapse-todo-btn');
     
     function edit() {
       while (selectedTodo.firstChild) {
@@ -111,13 +118,13 @@ const Todo = (() => {
         currentTodoPs[i].textContent = value;
       });
 
-      [...currentTodoPs, editBtnEl].forEach(el => selectedTodo.appendChild(el));
+      [...currentTodoPs, editBtnEl, expandBtn, collapseBtn].forEach(el => selectedTodo.appendChild(el));
     }
 
     function cancelEdit() {
       while (selectedTodo.firstChild) selectedTodo.removeChild(selectedTodo.firstChild);
       
-      [...currentTodoPs, editBtnEl].forEach(el => selectedTodo.appendChild(el));
+      [...currentTodoPs, editBtnEl, expandBtn, collapseBtn].forEach(el => selectedTodo.appendChild(el));
     }
     
     function remove(selectedTodo) {
@@ -125,6 +132,28 @@ const Todo = (() => {
     }
 
     return { edit, remove }
+  }
+
+  function expandTodo(selectedTodo) {
+    const expandBtn = selectedTodo.querySelector('.expand-todo-btn');
+    const hiddenEls = [selectedTodo.querySelector('.description'),
+                       selectedTodo.querySelector('.notes'),
+                       selectedTodo.querySelector('.completed'),
+                       selectedTodo.querySelector('.collapse-todo-btn')];
+
+    hiddenEls.forEach(el => el.style.display = 'block');
+    expandBtn.style.display = 'none';
+  }
+  
+  function collapseTodo(selectedTodo) {
+    const expandBtn = selectedTodo.querySelector('.expand-todo-btn');
+    const hideEls = [selectedTodo.querySelector('.description'),
+                       selectedTodo.querySelector('.notes'),
+                       selectedTodo.querySelector('.completed'),
+                       selectedTodo.querySelector('.collapse-todo-btn')];
+                       
+    hideEls.forEach(el => el.style.display = 'none');
+    expandBtn.style.display = 'block';
   }
   
   return { display, add, editTodo }
