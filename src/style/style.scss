@@ -79,6 +79,7 @@ body {
   .todo-container {
     flex-basis: 22.5%;
     position: relative;
+    height: 100%;
     margin: 1.25%;
     padding: 35px 25px 10px;
     border: 1px solid #000;
@@ -98,6 +99,20 @@ body {
 
     .description, .notes, .completed {
       display: none;
+      padding: 5px 0;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .description {
+    }
+
+    .notes {
+      font-style: italic;
+    }
+
+    .completed {
+
     }
     
     .edit-todo-btn {

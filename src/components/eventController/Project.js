@@ -4,7 +4,7 @@ const projectEvents = (() => {
       const newTodo = {};
       const newTodoValueEls = [...document.querySelectorAll('#new-todo-container > div > .new-todo-value')];
       
-      if (newTodoValueEls.some(el => el.value === '')) return;
+      if (newTodoValueEls.some(el => { if (el.id !== 'Completed') el.value === '' })) return;
       
       newTodoValueEls.forEach(el => {
         const attribute = el.id.split(' ').length > 1 ? el.id.split(' ')[0].toLowerCase() + el.id.split(' ')[1] : el.id.toLowerCase();
@@ -16,6 +16,7 @@ const projectEvents = (() => {
 
         if (attribute !== 'priority') el.value = '';
         if (attribute === 'completed') el.checked = false;
+        console.log(el);
       });
       console.log(Object.values(newTodo));
 
