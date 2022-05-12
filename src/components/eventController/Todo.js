@@ -8,11 +8,17 @@ const todoEvents = (() => {
   function confirmEdit(currentProject, confirmEdit, confirmEditBtn) {
     confirmEditBtn.addEventListener('click', () => {
       const selectedTodo = confirmEditBtn.parentElement.parentElement;
-      const newValues = [...selectedTodo.querySelectorAll('input')].map(input => input.value);
+      const newValues = [...selectedTodo.querySelectorAll('input')].map(input => {
+        if (input.type === 'checkbox') {
+          return input.checked ? 'Complete' : 'Incomplete';
+        } else {
+          return input.value;
+        }
+      });
       const index = [...confirmEditBtn.parentElement.parentElement.parentElement.children].indexOf(confirmEditBtn.parentElement.parentElement);
       
-      confirmEdit(selectedTodo, newValues);
       currentProject.todoList[index].editTodo(newValues);
+      confirmEdit(selectedTodo, newValues);
     });
   }
 

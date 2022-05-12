@@ -7,10 +7,12 @@ import expandIcon from '../../../dist/assets/icons/chevron-down.png';
 import collapseIcon from '../../../dist/assets/icons/chevron-up.png';
 
 const Todo = (() => {
+  let currentTodoList;
   let currentProject;
   const todosContainer = document.querySelector('#todos-container');
 
-  function display(selectedProject) {
+  function display(todoList, selectedProject) {
+    currentTodoList = todoList;
     currentProject = selectedProject;
     while (todosContainer.firstChild) todosContainer.removeChild(todosContainer.firstChild);
 
@@ -68,6 +70,8 @@ const Todo = (() => {
     
     [editBtn, expandBtn, collapseBtn].forEach(btn => todoContainer.appendChild(btn));
     todosContainer.appendChild(todoContainer);
+
+    localStorage.setItem('todoList', JSON.stringify(currentTodoList));
   }
 
   function editTodo(e) {
@@ -84,9 +88,15 @@ const Todo = (() => {
 
       const inputDiv = document.createElement('div');
       const btnDiv = document.createElement('div');
+      btnDiv.classList.add('edit-btns-container');
 
       currentTodoPs.forEach(p => {
         const input = document.createElement('input');
+
+        if (p.classList.contains('completed')) {
+          input.type = 'checkbox';
+          input.checked = p.textContent === 'Complete' ? true : false;
+        }
 
         input.classList.add(p.classList[0]);
         input.value = p.textContent;
@@ -95,8 +105,6 @@ const Todo = (() => {
         inputDiv.appendChild(input);        
       });
 
-      console.log(inputDiv);
-      
       const confirmBtn = document.createElement('img');
       const cancelBtn = document.createElement('img');
       const deleteBtn = document.createElement('img');
@@ -116,12 +124,14 @@ const Todo = (() => {
     
     function confirmEdit(selectedTodo, newValues) {
       while (selectedTodo.firstChild) selectedTodo.removeChild(selectedTodo.firstChild);
-
+      
       newValues.forEach((value, i) => {
         currentTodoPs[i].textContent = value;
       });
-
+      
       [...currentTodoPs, editBtnEl, expandBtn, collapseBtn].forEach(el => selectedTodo.appendChild(el));
+      
+      localStorage.setItem('todoList', JSON.stringify(currentTodoList));
     }
 
     function cancelEdit() {
@@ -132,6 +142,7 @@ const Todo = (() => {
     
     function remove(selectedTodo) {
       todosContainer.removeChild(selectedTodo);
+      localStorage.setItem('todoList', JSON.stringify(currentTodoList));
     }
 
     return { edit, remove }

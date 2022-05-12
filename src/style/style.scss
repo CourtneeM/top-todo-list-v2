@@ -144,4 +144,14 @@ body {
       padding: 0 40%;
     }
   }
+  
+  .edit-btns-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    img {
+      margin: 0 8px;
+    }
+  }
 }

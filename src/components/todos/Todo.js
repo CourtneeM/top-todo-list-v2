@@ -9,14 +9,14 @@ class Todo {
   }
 
   editTodo(newValues) {
-    const [newTitle, newDescription, newDueDate, newPriority, newNotes, newCompleted] = [...newValues];
+    const [newTitle, newDescription, newDueDate, newNotes, newCompleted] = [...newValues];
     
     this.title = newTitle;
     this.description = newDescription;
     this.dueDate = newDueDate;
-    this.priority = newPriority;
+    // this.priority = newPriority;
     this.notes = newNotes;
-    this.completed = newCompleted;
+    this.completed = newCompleted === 'Complete' ? true : false;
   }
 }
 

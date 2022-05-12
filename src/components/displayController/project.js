@@ -3,7 +3,7 @@ import projectEvents from '../eventController/Project';
 import addIcon from '../../../dist/assets/icons/plus-box-outline.png';
 
 
-function Project(selectedProject) {
+function Project(todoList, selectedProject) {
   const todosContainer = document.querySelector('#todos-container');
 
   const selectedProjectTitle = document.querySelector('#selected-project-title');
@@ -59,7 +59,7 @@ function Project(selectedProject) {
   const displayProjectContainer = document.querySelector('#display-project-container');
 
   newTodoContainer();
-  Todo.display(selectedProject);
+  Todo.display(todoList, selectedProject);
 }
 
 export default Project;

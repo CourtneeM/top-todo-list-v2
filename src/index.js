@@ -5,3 +5,4 @@ import './style/style.scss'
 
 // display
 displayApp(todoList);
+localStorage.setItem('todoList', JSON.stringify(todoList));

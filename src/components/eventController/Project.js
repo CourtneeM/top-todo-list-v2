@@ -18,8 +18,8 @@ const projectEvents = (() => {
         if (attribute === 'completed') el.checked = false;
       });
 
-      addTodo( newTodo );
       selectedProject.createTodo(Object.values(newTodo));
+      addTodo( newTodo );
     });
   }
 

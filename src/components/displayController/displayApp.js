@@ -21,7 +21,7 @@ function displayApp(todoList) {
   });
 
   function loadProject(projectIndex) {
-    Project(todoList.projectList[projectIndex]);
+    Project(todoList, todoList.projectList[projectIndex]);
   }
 
   Sidebar(todoList);
